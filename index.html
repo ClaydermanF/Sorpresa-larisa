@@ -28,10 +28,10 @@
         /* --- Animación de Corazones Flotantes en el Fondo --- */
         .bg-heart {
             position: absolute;
-            color: #fecdd3; /* Color rosado suave */
+            color: #fecdd3;
             opacity: 0.6;
             animation: floatUp linear infinite;
-            z-index: -1; /* Para que queden detrás de las fotos */
+            z-index: -1;
         }
 
         @keyframes floatUp {
@@ -45,8 +45,8 @@
         .flip-card {
             background-color: transparent;
             width: 100%;
-            height: 400px;
-            perspective: 1000px; /* Crea el espacio 3D */
+            height: 500px; /* ALTURA AUMENTADA */
+            perspective: 1000px; 
             cursor: pointer;
         }
 
@@ -56,27 +56,24 @@
             height: 100%;
             text-align: center;
             transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d; /* Mantiene a los hijos en 3D */
+            transform-style: preserve-3d; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border-radius: 12px;
         }
 
-        /* Clase que se activa con JavaScript al hacer clic */
         .flip-card.flipped .flip-card-inner {
             transform: rotateY(180deg);
         }
 
-        /* Caras frontal y trasera de la tarjeta */
         .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
-            -webkit-backface-visibility: hidden; /* Oculta la parte trasera en Safari */
-            backface-visibility: hidden;         /* Oculta la parte que no está mirando a la cámara */
+            -webkit-backface-visibility: hidden; 
+            backface-visibility: hidden;         
             border-radius: 12px;
         }
 
-        /* Diseño de la cara Frontal (Estilo Polaroid) */
         .flip-card-front {
             background-color: white;
             padding: 16px;
@@ -101,7 +98,7 @@
         }
 
         .flip-card:hover .polaroid-img-container img {
-            transform: scale(1.05); /* Pequeño zoom al pasar el mouse */
+            transform: scale(1.05); 
         }
 
         .polaroid-caption {
@@ -113,20 +110,35 @@
             color: #475569;
         }
 
-        /* Diseño de la cara Trasera (El mensaje oculto) */
+        /* Diseño de la cara Trasera ajustado para textos largos */
         .flip-card-back {
             background: linear-gradient(135deg, #fda4af 0%, #fb7185 100%);
             color: white;
-            transform: rotateY(180deg); /* La cara trasera está girada inicialmente */
+            transform: rotateY(180deg); 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 30px;
+            justify-content: flex-start; /* Permite que el texto empiece arriba */
+            padding: 30px 20px;
             border: 2px solid #f43f5e;
+            overflow-y: auto; /* ACTIVA EL SCROLL */
         }
 
-        /* Animación suave para indicar que se pueden tocar */
+        /* Estilo personalizado para la barra de desplazamiento de la tarjeta */
+        .flip-card-back::-webkit-scrollbar {
+            width: 6px;
+        }
+        .flip-card-back::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .flip-card-back::-webkit-scrollbar-thumb {
+            background: #be123c; /* Un rojo oscuro que combina */
+            border-radius: 8px;
+        }
+
         .pulse-hint {
             animation: pulseHint 2s infinite;
         }
@@ -138,7 +150,6 @@
 </head>
 <body class="flex flex-col items-center justify-start py-12 px-4 relative z-0">
 
-    <!-- Contenedor donde se generarán los corazones del fondo -->
     <div id="hearts-container" class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden"></div>
 
     <div class="max-w-6xl w-full text-center mb-10 z-10">
@@ -150,13 +161,11 @@
         </p>
     </div>
 
-    <!-- Grid adaptable: 1 columna en celulares, 3 columnas en computadoras -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl z-10">
 
         <!-- TARJETA 1 -->
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-card-inner">
-                <!-- Frente: Foto -->
                 <div class="flip-card-front">
                     <div class="polaroid-img-container">
                         <img src="Foto1.jpeg">
@@ -165,13 +174,13 @@
                         Aquel día...
                     </div>
                 </div>
-                <!-- Reverso: Mensaje -->
                 <div class="flip-card-back">
-                    <h2 class="manuscrita text-4xl mb-4 font-bold">Nuestra Conexión</h2>
-                    <p class="text-lg leading-relaxed text-center font-light">
+                    <h2 class="manuscrita text-4xl mb-4 font-bold shrink-0">Nuestra Conexión</h2>
+                    <!-- Texto ajustado: más pequeño y justificado -->
+                    <p class="text-sm leading-relaxed text-justify font-light w-full">
                         "No es fácil encontrar las palabras correctas cuando uno sabe que falló gravemente, pero no quiero esconderme. Te escribo para pedirte perdón por todo el daño que te he hecho. Sé que mis acciones te lastimaron y que mis mentiras quebrantaron la confianza que con tanto amor construiste para mí. No debí hacer eso nunca. No debí poner en riesgo nuestra relación ni tu tranquilidad por decisiones egoístas. Sé que el perdón no es automático y que las palabras se las lleva el viento si no van acompañadas de un cambio real, el cual estoy dispuesto a demostrarte. Respeto el tiempo y el espacio que necesites para procesar esto, pero no quería dejar pasar más tiempo sin decirte lo mucho que lo lamento."
                     </p>
-                    <div class="mt-6 text-3xl opacity-80">❤️</div>
+                    <div class="mt-6 text-3xl opacity-80 shrink-0">❤️</div>
                 </div>
             </div>
         </div>
@@ -179,7 +188,6 @@
         <!-- TARJETA 2 -->
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-card-inner">
-                <!-- Frente: Foto -->
                 <div class="flip-card-front">
                     <div class="polaroid-img-container">
                         <img src="Foto2.jpeg">
@@ -188,13 +196,13 @@
                         Tus locuras...
                     </div>
                 </div>
-                <!-- Reverso: Mensaje -->
                 <div class="flip-card-back">
-                    <h2 class="manuscrita text-4xl mb-4 font-bold">Tus Detalles</h2>
-                    <p class="text-lg leading-relaxed text-center font-light">
-                        "he estado pensando en todo lo que pasamos y quería decirte que ya acepté las cosas. Sé que dolió, pero entendí que los dos somos humanos, nos equivocamos en nuestras decisiones y nos dejamos llevar en su momento. Lo importante es que decidimos no tirar todo a la basura."
+                    <h2 class="manuscrita text-4xl mb-4 font-bold shrink-0">Tus Detalles</h2>
+                    <!-- Texto ajustado: más pequeño y justificado -->
+                    <p class="text-sm leading-relaxed text-justify font-light w-full">
+                        "He estado pensando en todo lo que pasamos y quería decirte que ya acepté las cosas. Sé que dolió, pero entendí que los dos somos humanos, nos equivocamos en nuestras decisiones y nos dejamos llevar en su momento. Lo importante es que decidimos no tirar todo a la basura."
                     </p>
-                    <div class="mt-6 text-3xl opacity-80">✨</div>
+                    <div class="mt-6 text-3xl opacity-80 shrink-0">✨</div>
                 </div>
             </div>
         </div>
@@ -202,7 +210,6 @@
         <!-- TARJETA 3 -->
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-card-inner">
-                <!-- Frente: Foto -->
                 <div class="flip-card-front">
                     <div class="polaroid-img-container">
                         <img src="Foto3.jpeg">
@@ -211,13 +218,13 @@
                         Para siempre.
                     </div>
                 </div>
-                <!-- Reverso: Mensaje -->
                 <div class="flip-card-back">
-                    <h2 class="manuscrita text-4xl mb-4 font-bold">Nuestro Futuro</h2>
-                    <p class="text-lg leading-relaxed text-center font-light">
+                    <h2 class="manuscrita text-4xl mb-4 font-bold shrink-0">Nuestro Futuro</h2>
+                    <!-- Texto ajustado: más pequeño y justificado -->
+                    <p class="text-sm leading-relaxed text-justify font-light w-full">
                         "Quiero que dejemos todo lo atrás y sigamos adelante juntos. Si te soy sincero, tuve muchísimo miedo de perderte, se me caía el mundo encima de solo pensarlo, y ese miedo me hizo reaccionar y darme cuenta de lo que de verdad importa. Todo esto me sirvió para aterrizar y comprometerme a mejorar como persona. Voy a cambiar lo que tenga que cambiar, porque mi prioridad eres tú y que estemos bien y en paz. Quiero seguir a tu lado pase lo que pase, porque tengo clarísimo que eres la mujer con la que soñé para toda la vida y eres el amor de mi vida. No tengo ni una sola duda de que lo nuestro vale la pena y te lo voy a demostrar cada día."
                     </p>
-                    <div class="mt-6 text-3xl opacity-80">🥰</div>
+                    <div class="mt-6 text-3xl opacity-80 shrink-0">🥰</div>
                 </div>
             </div>
         </div>
@@ -225,16 +232,15 @@
     </div>
 
     <script>
-        // Función para generar los corazones flotantes del fondo
         function createHearts() {
             const container = document.getElementById('hearts-container');
             const heartSymbols = ['❤️', '💖', '✨', '💕'];
-            const maxHearts = 25; // Cantidad de corazones en pantalla a la vez
+            const maxHearts = 25; 
 
             for (let i = 0; i < maxHearts; i++) {
                 setTimeout(() => {
                     spawnHeart(container, heartSymbols);
-                }, i * 300); // Espaciamos la creación de cada corazón
+                }, i * 300); 
             }
         }
 
@@ -242,25 +248,21 @@
             const heart = document.createElement('div');
             heart.classList.add('bg-heart');
             
-            // Selección aleatoria del símbolo, tamaño y posición
             heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px'; // Entre 10px y 30px
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px'; 
             
-            // Duración de la animación aleatoria para que no suban todos al mismo tiempo
-            const duration = Math.random() * 5 + 5; // Entre 5 y 10 segundos
+            const duration = Math.random() * 5 + 5; 
             heart.style.animationDuration = duration + 's';
 
             container.appendChild(heart);
 
-            // Una vez que termina su animación, lo eliminamos y creamos uno nuevo para que el efecto sea infinito
             setTimeout(() => {
                 heart.remove();
                 spawnHeart(container, symbols);
             }, duration * 1000);
         }
 
-        // Iniciamos el efecto de corazones al cargar la página
         window.onload = () => {
             createHearts();
         };
