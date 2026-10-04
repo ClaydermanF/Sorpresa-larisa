@@ -267,5 +267,22 @@
             createHearts();
         };
     </script>
+    <!-- Reproductor de audio oculto -->
+    <audio id="musica-fondo" loop>
+        <source src="Cancion.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Activa la música cuando ella toque la pantalla por primera vez
+        let musicaReproducida = false;
+        document.body.addEventListener('click', function() {
+            if (!musicaReproducida) {
+                let audio = document.getElementById('musica-fondo');
+                audio.volume = 0.5; // Volumen suave al 40% para que pueda concentrarse en leer
+                audio.play();
+                musicaReproducida = true;
+            }
+        });
+    </script>
 </body>
 </html>
